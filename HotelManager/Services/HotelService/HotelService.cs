@@ -6,9 +6,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace HotelManager.Services;
+namespace HotelManager.Services.HotelService;
 
-internal class HotelService
+internal class HotelService : IHotelService
 {
     public List<Hotel> GetHotels(string jsonPath)
     {

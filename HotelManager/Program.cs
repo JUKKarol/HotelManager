@@ -1,7 +1,9 @@
 ﻿using System.Text.Json;
 using System;
 using HotelManager.Entities;
-using HotelManager.Services;
+using Microsoft.Extensions.DependencyInjection;
+using HotelManager.Services.HotelService;
+using HotelManager.Services.BookingService;
 
 namespace HotelManager;
 
@@ -12,20 +14,27 @@ internal class Program
         string workingDirectory = Environment.CurrentDirectory;
         string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.Parent.FullName;
 
-        string hotelsJson = Path.Combine(projectDirectory, "hotels.json");
+        string hotelsJsonPath = Path.Combine(projectDirectory, "hotels.json");
+        string bookingsJsonPath = Path.Combine(projectDirectory, "bookings.json");
 
-        var hotelService = new HotelService();
+        var services = new ServiceCollection()
+            .AddTransient<IHotelService, HotelService>()
+            .AddTransient<IBookingService, BookingService>()
+            .BuildServiceProvider();
 
-        List<Hotel> hotels = hotelService.GetHotels(hotelsJson);
+        var hotelService = services.GetService<IHotelService>();
+        var bookingService = services.GetService<IBookingService>();
 
-        foreach (var hotel in hotels)
+        var hotels = hotelService.GetHotels(hotelsJsonPath);
+        var bookings = bookingService.GetBooking(bookingsJsonPath);
+
+        foreach (var booking in bookings)
         {
-            Console.WriteLine($"Hotel: {hotel.Name}");
-
-            foreach (var room in hotel.Rooms)
-            {
-                Console.WriteLine($"Room: {room.RoomId}");
-            }
+            Console.WriteLine($"hotelId: {booking.HotelId}");
+            Console.WriteLine($"arrival: {booking.Arrival}");
+            Console.WriteLine($"departure: {booking.Departure}");
+            Console.WriteLine($"roomType: {booking.RoomType}");
+            Console.WriteLine($"roomRate: {booking.RoomRate}");
         }
     }
 }
