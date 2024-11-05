@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HotelManager.Services.HotelService;
 
-internal class HotelService : IHotelService
+public class HotelService : IHotelService
 {
     public List<Hotel> GetHotels(string jsonPath)
     {

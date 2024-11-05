@@ -29,23 +29,34 @@ internal class Program
         var userService = services.GetService<IUserService>();
 
         var hotels = hotelService.GetHotels(hotelsJsonPath);
+        if (hotels == null)
+        {
+            Console.WriteLine($"Can't read hotels.json at path {hotelsJsonPath}, check file.");
+            return;
+        }
+
         var bookings = bookingService.GetBooking(bookingsJsonPath);
+        if (bookings == null)
+        {
+            Console.WriteLine($"Can't read bookings.json at {bookingsJsonPath}, check file.");
+            return;
+        }
 
         hotelService.PrintHotels(hotels);
         bookingService.PrintBookings(bookings);
         Console.WriteLine();
 
-        string hotelId = userService.GetInput("hotel id:");
-        string arrivalString = userService.GetInput("arrival (yyyymmdd):");
+        string hotelId = userService.GetInput("Hotel id:");
+        string arrivalString = userService.GetInput("Arrival (yyyymmdd):");
         DateOnly arrival = DateOnly.ParseExact(arrivalString, "yyyyMMdd");
         Console.WriteLine("Press 'x' if you want to check arrival date only");
-        string departureString = userService.GetInput("departure (yyyymmdd):");
+        string departureString = userService.GetInput("Departure (yyyymmdd):");
         if (departureString == "x")
         {
             departureString = arrivalString;
         }
         DateOnly departure = DateOnly.ParseExact(departureString, "yyyyMMdd");
-        string roomType = userService.GetInput("room type:");
+        string roomType = userService.GetInput("Room type:");
 
         var userTargetHotel = hotels.FirstOrDefault(h => h.Id == hotelId);
 

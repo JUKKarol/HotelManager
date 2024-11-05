@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelManager.Entities;
 
-internal class Booking
+public class Booking
 {
     public string HotelId { get; set; }
 

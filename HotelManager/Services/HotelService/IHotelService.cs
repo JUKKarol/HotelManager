@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelManager.Services.HotelService;
 
-internal interface IHotelService
+public interface IHotelService
 {
     List<Hotel> GetHotels(string jsonPath);
 

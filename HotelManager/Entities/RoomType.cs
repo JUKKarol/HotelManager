@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelManager.Entities;
 
-internal class RoomType
+public class RoomType
 {
     public string Code { get; set; }
     public string Description { get; set; }
