@@ -38,15 +38,34 @@ internal class Program
         string hotelId = userService.GetInput("hotel id:");
         string arrivalString = userService.GetInput("arrival (yyyymmdd):");
         DateOnly arrival = DateOnly.ParseExact(arrivalString, "yyyyMMdd");
+        Console.WriteLine("Press 'x' if you want to check arrival date only");
         string departureString = userService.GetInput("departure (yyyymmdd):");
+        if (departureString == "x")
+        {
+            departureString = arrivalString;
+        }
         DateOnly departure = DateOnly.ParseExact(departureString, "yyyyMMdd");
         string roomType = userService.GetInput("room type:");
 
-        var existingRooms = hotels.FirstOrDefault(h => h.Id == hotelId)?.Rooms.Where(r => r.RoomType == roomType).ToList();
+        var userTargetHotel = hotels.FirstOrDefault(h => h.Id == hotelId);
 
-        if (existingRooms == null)
+        if (userTargetHotel == null)
         {
-            Console.WriteLine("Hotel or room not found.");
+            Console.WriteLine("Hotel not found.");
+            return;
         }
+        else
+        {
+            var userTargetRooms = userTargetHotel.Rooms.FirstOrDefault(r => r.RoomType == roomType);
+
+            if (userTargetRooms == null)
+            {
+                Console.WriteLine("Room not found.");
+                return;
+            }
+        }
+
+        int availableRoomsCount = hotelService.GetAvailableRooms(userTargetHotel, bookings, hotelId, roomType, arrival, departure);
+        Console.WriteLine($"Available rooms: {availableRoomsCount}");
     }
 }

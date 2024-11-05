@@ -60,4 +60,24 @@ internal class HotelService : IHotelService
             Console.WriteLine("----------------------------");
         }
     }
+
+    public int GetAvailableRooms(Hotel hotel, List<Booking> bookings, string hotelId, string roomType, DateOnly arrival, DateOnly departure)
+    {
+        if (hotel == null)
+        {
+            return 0;
+        }
+
+        var targetRooms = hotel.Rooms.Where(r => r.RoomType == roomType).ToList();
+
+        int bookedRoomsCount = bookings.Count(b =>
+            b.HotelId == hotelId &&
+            b.RoomType == roomType &&
+            (arrival <= b.Departure && departure >= b.Arrival)
+        );
+
+        int availableRoomsCount = targetRooms.Count - bookedRoomsCount;
+
+        return Math.Max(availableRoomsCount, 0);
+    }
 }
