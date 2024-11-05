@@ -31,4 +31,33 @@ internal class HotelService : IHotelService
             return null;
         }
     }
+
+    public void PrintHotels(List<Hotel> hotels)
+    {
+        Console.WriteLine("****************************");
+        Console.WriteLine("Hotels:");
+        Console.WriteLine("****************************");
+
+        foreach (var hotel in hotels)
+        {
+            Console.WriteLine($"Hotel ID: {hotel.Id}");
+            Console.WriteLine($"Name: {hotel.Name}");
+            Console.WriteLine("Room Types:");
+            foreach (var roomType in hotel.RoomTypes)
+            {
+                Console.WriteLine($"Code: {roomType.Code}");
+                Console.WriteLine($"Description: {roomType.Description}");
+                Console.WriteLine($"Amenities: {string.Join(", ", roomType.Amenities)}");
+                Console.WriteLine($"Features: {string.Join(", ", roomType.Features)}");
+            }
+            Console.WriteLine("Rooms:");
+            foreach (var room in hotel.Rooms)
+            {
+                Console.WriteLine($"Room Type: {room.RoomType}");
+                Console.WriteLine($"Room Rate: {room.RoomId}");
+            }
+
+            Console.WriteLine("----------------------------");
+        }
+    }
 }

@@ -32,4 +32,21 @@ internal class BookingService : IBookingService
             return null;
         }
     }
+
+    public void PrintBookings(List<Booking> bookings)
+    {
+        Console.WriteLine("****************************");
+        Console.WriteLine("Bookings:");
+        Console.WriteLine("****************************");
+
+        foreach (var booking in bookings)
+        {
+            Console.WriteLine($"Hotel ID: {booking.HotelId}");
+            Console.WriteLine($"Arrival: {booking.Arrival}");
+            Console.WriteLine($"Departure: {booking.Departure}");
+            Console.WriteLine($"Room Type: {booking.RoomType}");
+            Console.WriteLine($"Room Rate: {booking.RoomRate}");
+            Console.WriteLine("----------------------------");
+        }
+    }
 }

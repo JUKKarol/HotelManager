@@ -10,4 +10,6 @@ namespace HotelManager.Services.HotelService;
 internal interface IHotelService
 {
     List<Hotel> GetHotels(string jsonPath);
+
+    void PrintHotels(List<Hotel> hotels);
 }

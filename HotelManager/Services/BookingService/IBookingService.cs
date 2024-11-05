@@ -10,4 +10,6 @@ namespace HotelManager.Services.BookingService;
 internal interface IBookingService
 {
     List<Booking> GetBooking(string jsonPath);
+
+    void PrintBookings(List<Booking> bookings);
 }
