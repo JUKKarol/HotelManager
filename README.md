@@ -11,8 +11,6 @@ HotelManager is a simple console application for checking hotel room availabilit
 ## Requirements
 1. Install the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
 
-   Alternatively, if you just want to run the app without building it, you can use the pre-built `.exe` file found in the main project directory.
-
 ## JSON Files
 Ensure `hotels.json` and `bookings.json` are present in the project directory. These files contain the required hotel and booking data. They should download automatically with the repository, but if they are missing or incorrectly formatted, an error message will appear in the console with further instructions.
 

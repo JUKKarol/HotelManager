@@ -13,7 +13,9 @@ internal class Program
     private static void Main(string[] args)
     {
         string workingDirectory = Environment.CurrentDirectory;
-        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.Parent.FullName;
+        string projectDirectory = Directory.GetParent(workingDirectory).FullName;
+        //for dev run
+        //string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.Parent.FullName;
 
         string hotelsJsonPath = Path.Combine(projectDirectory, "hotels.json");
         string bookingsJsonPath = Path.Combine(projectDirectory, "bookings.json");
